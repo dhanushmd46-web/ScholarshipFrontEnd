@@ -4,7 +4,7 @@ import LandingPage from "./components/LandingPage";
 import LoginForm from "./components/Login";
 import RegisterForm from "./components/Register";
 import Header from "./components/Header";
-import protectedroute from "./components/protectedroute";         
+import ProtectedRoute from "./components/protectedroute";         
 import ScholarshipList from "./components/ScholarshipList";
 import CreateScholarshipPage from "./components/CreateScholarship";
 import EditScholarship from "./components/EditScholarship";
