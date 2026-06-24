@@ -16,7 +16,7 @@ export default function RegisterForm() {
     setSuccess('')
     setLoading(true)
     try {
-      await client.post('/auth/register', { email:username, password, role: 'user' })
+      await client.post('/auth/register', { username:username, password, role: 'user' })
       setSuccess('Account created! Redirecting to login...')
       setTimeout(() => navigate('/login'), 1500)
     } catch (err) {
