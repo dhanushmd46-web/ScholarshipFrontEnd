@@ -13,22 +13,34 @@ export default function CreateScholarshipPage() {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
  
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        setError("")
-        setLoading(true)
-        try {
-            await client.post("/scholarship", {
-                ...form,
-                amount: Number(form.amount),
-            })
-            navigate("/scholarship")
-        } catch (err) {
-            setError(err.response?.data?.detail || "Failed to create scholarship")
-        } finally {
-            setLoading(false)
+const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError("")
+    setLoading(true)
+    try {
+        await client.post("/scholarship", {
+            ...form,
+            amount: Number(form.amount),
+        })
+        navigate("/scholarship")
+    } catch (err) {
+        const backendError = err.response?.data?.detail;
+
+        if (Array.isArray(backendError)) {
+            // Extracts the specific field that failed and its reason
+            const errorMessages = backendError.map(errObj => {
+                const field = errObj.loc.slice(1).join("."); 
+                return `${field ? field + ': ' : ''}${errObj.msg}`;
+            }).join(", ");
+            
+            setError(errorMessages);
+        } else {
+            setError(typeof backendError === "string" ? backendError : "Failed to create scholarship");
         }
+    } finally {
+        setLoading(false)
     }
+}
  
     return (
         <>
