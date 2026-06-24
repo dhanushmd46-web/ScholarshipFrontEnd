@@ -11,6 +11,7 @@ import EditScholarship from "./components/EditScholarship";
 import ApplicationList from "./components/ApplicationList";
 import CreateApplicationPage from "./components/CreateApplication";
 import ScholarshipCard from "./components/ScholarshipCard";
+import EditApplication from "./components/EditApplication";
 
 export default function App() {
     return (
@@ -48,6 +49,10 @@ export default function App() {
 
                 <Route path="/application/new" element={
                     <ProtectedRoute><CreateApplicationPage /></ProtectedRoute>
+                } />
+
+                <Route path="/application/edit/:id" element={
+                    <ProtectedRoute><EditApplication /></ProtectedRoute>
                 } />
 
                 <Route path="*" element={<Navigate to="/" replace />} />
